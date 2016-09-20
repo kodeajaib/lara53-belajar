@@ -1,0 +1,32 @@
+1. konfigurasi database di env. file
+2. - setelah itu buat auth nya caranya "php artisan make auth" ketikkan di terminal
+   - cek di folder databasenya isi data tables sesuai kebutuhanmu
+   - kemudian ketikkan di cmd/bash php migrate maka jadilah login registermu
+3. untuk membuat hak akses
+   - buat dulu Middleware caranya ketikkan di cmd php artisan make:middleware IsAdmin (checkage itu ganti jadi IsAdmin)
+   - isi middleware isadmin tadi dengan
+      ######################################################################
+
+      # if ( auth()->check() && $request->user()->level == 'admin' )        #
+      #   {                                                                 #
+      #     return $next($request);                                         #
+      # }                                                                   #
+      #                                                                     #
+      # return redirect('home');
+
+      #######################################################################
+
+   - cari kernel.php di folder Http kemudia di routeMiddleware isi ini <!-- 'isadmin' => \App\Http\Middleware\IsAdmin::class,-->
+   - di route mu isi ini
+     ##########################################################################################################################
+
+       Route::group(['middleware' => 'isadmin'], function () {  <-- isadmin itu nama dari isadmi yang huruf kecil diatas
+           Route::resource('slider', 'SliderController'); <-- ganti sesuai controller mu
+
+       });
+       
+      ######################################################################################################################
+
+    - setelah itu udh deh beres
+
+4. untuk crud banyak contoh di google

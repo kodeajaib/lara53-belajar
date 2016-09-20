@@ -1,0 +1,36 @@
+1. Buka terminal 
+   ketikkan --> php artisan make:controller BlogController --resource <-- BlogController ganti dengan nama controller mu
+
+
+2. Kemudia buat model nya 
+	->> php artisan make:model Mblog
+   - dikelas Mblog isikan ini
+   
+   class Mblog extends Model
+	{
+	  protected $table = 'tblog';
+	  protected $fillable = ['judulblog', 'fotoblog','isiblog', ' 	kategoriblog', 'tagblog', ' 	slugblog',];
+	}
+
+3. Kemudian buat table nya
+	-->> php artisan make:migration create_tblog_table --create=tblog
+   setelah itu edit table dengan sesuai kebutuhan contoh table dibawah ini
+   
+     public function up()
+    {
+        Schema::create('tblog', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('judulblog', 200);
+            $table->string('fotoblog', 200);
+            $table->string('isiblog', 200);
+            $table->string('kategoriblog', 200);
+            $table->string('tagblog', 200);
+            $table->string('slugblog', 200);
+            $table->timestamps();
+        });
+    }
+
+4. Ketikkan migrate 
+  -->> php artisan migrate
+5. Table telah di buat di localhost
+
